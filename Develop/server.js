@@ -34,6 +34,34 @@ app.get('/api/notes', (req, res) =>
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
 );
 
+// POST Route for submitting feedback
+app.post('/api/notes', (req, res) => {
+    // Destructuring assignment for the items in req.body
+    const { title, text, note_id } = req.body;
+  
+    // If all the required properties are present
+    if (title && text) {
+      // Variable for the object we will save
+      const note = {
+        title,
+        text,
+        note_id: uuid(),
+      };
+  
+      readAndAppend(note, './db/db.json');
+  
+      const response = {
+        status: 'success',
+        body: note,
+      };
+  
+      res.json(response);
+    } else {
+      res.json('Error in posting note');
+    }
+  });
+  
+
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
