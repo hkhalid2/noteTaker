@@ -13,17 +13,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 
-// GET Route homepage
+// GET Route for initial start page
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, './public/index.html'))
 );
 
-// GET Route for notes
+// GET Route for notes.html page
 app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, './public/notes.html'))
 );
 
-// // GET Route for index html file
+// // GET Route for index html file 
+//CANNOT USE SINCE IT MESSES WITH LOADING/ADDING NOTES TO JSON FILE
 // app.get('*', (req, res) =>
 //   res.sendFile(path.join(__dirname, '/public/index.html'))
 // );
@@ -33,7 +34,7 @@ app.get('/api/notes', (req, res) =>
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
 );
 
-// POST Route for submitting feedback
+// POST Route for recieving new note and return new note to client
 app.post('/api/notes', (req, res) => {
     // Destructuring assignment for the items in req.body
     const { title, text, note_id } = req.body;
@@ -61,7 +62,7 @@ app.post('/api/notes', (req, res) => {
     }
   });
 
-
+// shows that server is running app on specified port
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
