@@ -1,10 +1,9 @@
+//import dependancies
 const express = require('express');
 const uuid = require('./helpers/uuid')
 const { readFromFile, readAndAppend } = require('./helpers/fsUtil')
 const path = require('path');
-
 const PORT = process.env.PORT || 3001;
-
 const app = express();
 
 
@@ -15,12 +14,12 @@ app.use(express.static('public'));
 
 // GET Route for initial start page
 app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, './public/index.html'))
+  res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
 // GET Route for notes.html page
 app.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, './public/notes.html'))
+  res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
 // // GET Route for index html file 
@@ -58,7 +57,7 @@ app.post('/api/notes', (req, res) => {
       res.json(response);
 
     } else {
-      res.json('Error in posting new note');
+      res.json('Error in appending new note');
     }
   });
 
