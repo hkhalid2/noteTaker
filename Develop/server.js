@@ -1,14 +1,12 @@
 const express = require('express');
-const fs = require('fs');
-const util = require('util');
 const uuid = require('./helpers/uuid')
-const { readFromFile, writeToFile, readAndAppend} = require('./helpers/fsUtil')
+const { readFromFile, readAndAppend } = require('./helpers/fsUtil')
 const path = require('path');
 
 const PORT = process.env.port || 3001;
 const app = express();
 
-//middleware
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -16,7 +14,7 @@ app.use(express.static('public'));
 
 // GET Route for homepage
 app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
+  res.sendFile(path.join(__dirname, './public/index.html'))
 );
 
 // GET Route for notes
@@ -24,10 +22,10 @@ app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, './public/notes.html'))
 );
 
-// GET Route for index html file
-app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
-);
+// // GET Route for index html file
+// app.get('*', (req, res) =>
+//   res.sendFile(path.join(__dirname, '/public/index.html'))
+// );
 
 // GET Route for reading db.json and return all saved notes.
 app.get('/api/notes', (req, res) =>
@@ -40,8 +38,8 @@ app.post('/api/notes', (req, res) => {
     const { title, text, note_id } = req.body;
   
     // If all the required properties are present
-    if (title && text) {
-      // Variable for the object we will save
+    if (req.body) {
+      // Variable for the object we will save along with unique id
       const note = {
         title,
         text,
@@ -56,11 +54,11 @@ app.post('/api/notes', (req, res) => {
       };
   
       res.json(response);
+
     } else {
-      res.json('Error in posting note');
+      res.json('Error in posting new note');
     }
   });
-  
 
 
 app.listen(PORT, () =>
