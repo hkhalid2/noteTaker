@@ -7,13 +7,19 @@ The main problems this app solves include:
 * Creating various routes that return certain html files using a GET request, returns all saved notes as JSON using a GET request and finally recieve a new note to save on request body using a POST request.
 * Clicking an email address link and already creating an email form addressed to said email using the users default mail platform
 * Giving each created note Unique ID when its saved.
-* Creating a live webpage using Heroku that utilizes the server file created but without using the local termninal.
+* Creating a live webpage using Heroku that utilizes the server file created but without using the local terminal.
 
 Overall this project taught me specifically how to various routes using both GET/POST requests, how to assign unique IDs to objects, how to use various fs methods and finally how to create a live webapp using heroku to host said app.
 
 ## Installation
 Node was required to be installed. Node_modules were needed to be installed for express as well as package-lock.json which correspond with the supplied package.json
 ``npm i``
+
+## Technlogies used
+* Javascript
+* Express.js
+* Node.js
+* Heroku
 
 ## Usage
 ``node server``
@@ -32,6 +38,9 @@ MIT License
             
 ## Badges
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Live Deployement 
+https://sleepy-sands-68935.herokuapp.com
 
 ### Demo Gif
 ![](demo.gif)
